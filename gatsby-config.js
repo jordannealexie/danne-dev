@@ -2,7 +2,7 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Jordanne Alexie M. Bartolome',
+    title: 'Jordanne',
     description:
       'Jordanne Alexie M. Bartolome is a Full Stack Developer specializing in building exceptional digital experiences.',
     siteUrl: 'https://jordannealexie.github.io', // Placeholder URL
