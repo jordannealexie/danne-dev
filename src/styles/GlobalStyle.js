@@ -75,6 +75,8 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: var(--navy);
+    background-image: radial-gradient(circle at 20% 0%, rgba(135, 167, 208, 0.18), transparent 42%),
+      radial-gradient(circle at 90% 15%, rgba(193, 141, 180, 0.14), transparent 38%);
     color: var(--slate);
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
@@ -100,6 +102,32 @@ const GlobalStyle = createGlobalStyle`
         transition: var(--transition);
         pointer-events: none;
         user-select: none;
+      }
+    }
+
+    &:before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 220ms ease;
+      background: radial-gradient(
+        circle 240px at var(--cursor-x, 50%) var(--cursor-y, 50%),
+        rgba(226, 202, 216, 0.16),
+        rgba(135, 167, 208, 0.1) 35%,
+        transparent 72%
+      );
+    }
+
+    &.cursor-glow-active:before {
+      opacity: 1;
+    }
+
+    @media (hover: none) {
+      &:before {
+        display: none;
       }
     }
   }

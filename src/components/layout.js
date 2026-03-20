@@ -46,6 +46,30 @@ const Layout = ({ children, location }) => {
     handleExternalLinks();
   }, [isLoading]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+
+    const handlePointerMove = e => {
+      root.style.setProperty('--cursor-x', `${e.clientX}px`);
+      root.style.setProperty('--cursor-y', `${e.clientY}px`);
+      body.classList.add('cursor-glow-active');
+    };
+
+    const handlePointerLeave = () => {
+      body.classList.remove('cursor-glow-active');
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerleave', handlePointerLeave);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerleave', handlePointerLeave);
+      body.classList.remove('cursor-glow-active');
+    };
+  }, []);
+
   return (
     <>
       <Head />
