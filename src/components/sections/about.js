@@ -135,16 +135,16 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hi! I’m Jordanne. I’m a computer engineering student at Pamantasan ng Lungsod ng
-              Maynila, and I love creating digital things.
+              Hi! I’m Danne. I’m a computer engineering student at Pamantasan ng Lungsod ng Maynila,
+              and I love creating digital things.
             </p>
 
             <p>
               My interest in programming started years ago, building websites on Neocities as a kid.
               That curiosity has since evolved into a passion for computer engineering. I’ve had the
               privilege of working as a Backend Developer Intern at a law firm, where I architected
-              route optimization systems using VROOM and OSRM, built scalable REST APIs with Node.js,
-              and implemented robust security policies.
+              route optimization systems using VROOM and OSRM, built scalable REST APIs with
+              Node.js, and implemented robust security policies.
             </p>
 
             <p>

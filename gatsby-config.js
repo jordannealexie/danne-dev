@@ -2,7 +2,7 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Jordanne',
+    title: 'Danne',
     description:
       'Jordanne Alexie M. Bartolome is a Full Stack Developer specializing in building exceptional digital experiences.',
     siteUrl: 'https://jordannealexie.github.io', // Placeholder URL
@@ -21,7 +21,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'Jordanne Alexie M. Bartolome',
-        short_name: 'Jordanne Alexie',
+        short_name: 'Danne',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
