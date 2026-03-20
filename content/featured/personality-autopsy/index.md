@@ -12,4 +12,4 @@ tech:
   - Context API
 ---
 
-A single-page interactive quiz application that generates a darkly comedic personality diagnosis based on user responses. Built as a fun experimental project, it explores AI-driven storytelling, response-pattern personality mapping, and lightweight modern frontend architecture.
+An interactive quiz website that generates a darkly comedic personality diagnosis based on user responses. Built as a fun experimental project, it explores AI-driven storytelling and response-pattern personality mapping. Inspired by Myer's Briggs' 16 Personality Test.

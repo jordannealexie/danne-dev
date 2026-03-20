@@ -7,7 +7,7 @@ range: 'Jan 2026 - Feb 2026'
 url: 'https://www.linkedin.com/company/spmadridlawfirm/'
 ---
 
-- Architected route optimization and task assignment backends using VROOM, OSRM, and H3 for dynamic service zoning.
+- Built route optimization and task assignment backends using VROOM, OSRM, and H3 for dynamic service zoning.
 - Implemented scalable REST APIs and core business logic using Node.js and Express.js.
 - Designed JWT authentication and dynamic ABAC/RBAC policy management systems.
 - Containerized services using Docker for seamless cloud deployments.
