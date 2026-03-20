@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
@@ -13,6 +14,22 @@ const StyledProjectsGrid = styled.ul`
   a {
     position: relative;
     z-index: 1;
+  }
+`;
+
+const StyledFeaturedSection = styled.section`
+  .numbered-heading {
+    @media (max-width: 600px) {
+      white-space: normal;
+      align-items: flex-start;
+      line-height: 1.3;
+
+      &:after {
+        width: 72px;
+        margin-left: 10px;
+        top: 12px;
+      }
+    }
   }
 `;
 
@@ -171,6 +188,11 @@ const StyledProject = styled.li`
       }
     }
 
+    @media (max-width: 480px) {
+      font-size: var(--fz-md);
+      line-height: 1.6;
+    }
+
     a {
       ${({ theme }) => theme.mixins.inlineLink};
     }
@@ -284,10 +306,10 @@ const StyledProject = styled.li`
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1);
       transition: var(--transition);
-      
+
       @media (max-width: 768px) {
         object-fit: cover;
-        width: auto;
+        width: 100%;
         height: 100%;
         filter: grayscale(100%) contrast(1) brightness(50%);
       }
@@ -313,11 +335,11 @@ const StyledProject = styled.li`
       align-items: center;
       justify-content: center;
       transition: var(--transition);
-      
+
       &:hover {
         color: var(--green);
       }
-      
+
       svg {
         width: 20px;
         height: 20px;
@@ -334,7 +356,7 @@ const StyledProject = styled.li`
         border-radius: 50%;
         background-color: var(--dark-slate);
         transition: var(--transition);
-        
+
         &.active {
           background-color: var(--green);
           transform: scale(1.5);
@@ -342,22 +364,94 @@ const StyledProject = styled.li`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+
+    .project-image-container {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      opacity: 1;
+      height: auto;
+      z-index: 2;
+    }
+
+    .project-image {
+      box-shadow: none;
+      border-radius: 0;
+
+      a {
+        background-color: transparent;
+        border-radius: 0;
+      }
+
+      .img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        filter: none;
+        mix-blend-mode: normal;
+        border-radius: 0;
+      }
+    }
+
+    .project-content {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      z-index: 3;
+      padding: 26px 22px 20px;
+      background: var(--light-navy);
+      text-align: left;
+    }
+
+    .project-description {
+      padding: 0;
+    }
+
+    .project-tech-list {
+      margin: 18px 0 8px;
+    }
+
+    .project-links {
+      margin-top: 4px;
+    }
+
+    .carousel-controls {
+      margin-top: 10px;
+      margin-bottom: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-image {
+      .img {
+        height: 190px;
+      }
+    }
+
+    .project-content {
+      padding: 22px 18px 16px;
+    }
+  }
 `;
 
 const FeaturedProject = ({ node, index, revealProjects }) => {
   const { frontmatter, html } = node;
   const { external, title, tech, github, images, cta } = frontmatter;
-  
+
   const [activeImg, setActiveImg] = useState(0);
-  
-  const handlePrev = (e) => {
+
+  const handlePrev = e => {
     e.preventDefault();
     if (images && images.length > 0) {
       setActiveImg(activeImg === 0 ? images.length - 1 : activeImg - 1);
     }
   };
-  
-  const handleNext = (e) => {
+
+  const handleNext = e => {
     e.preventDefault();
     if (images && images.length > 0) {
       setActiveImg(activeImg === images.length - 1 ? 0 : activeImg + 1);
@@ -376,10 +470,7 @@ const FeaturedProject = ({ node, index, revealProjects }) => {
             <a href={external ? external : github ? github : '#'}>{title}</a>
           </h3>
 
-          <div
-            className="project-description"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
 
           {tech.length && (
             <ul className="project-tech-list">
@@ -415,11 +506,19 @@ const FeaturedProject = ({ node, index, revealProjects }) => {
             {image && <GatsbyImage image={image} alt={title} className="img" />}
           </a>
         </div>
-        
+
         {images && images.length > 1 && (
           <div className="carousel-controls">
             <button className="carousel-arrow" onClick={handlePrev} aria-label="Previous image">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
             </button>
             <div className="carousel-dots">
               {images.map((_, i) => (
@@ -427,13 +526,39 @@ const FeaturedProject = ({ node, index, revealProjects }) => {
               ))}
             </div>
             <button className="carousel-arrow" onClick={handleNext} aria-label="Next image">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </button>
           </div>
         )}
       </div>
     </StyledProject>
   );
+};
+
+FeaturedProject.propTypes = {
+  node: PropTypes.shape({
+    frontmatter: PropTypes.shape({
+      external: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      tech: PropTypes.arrayOf(PropTypes.string).isRequired,
+      github: PropTypes.string,
+      images: PropTypes.array,
+      cta: PropTypes.string,
+    }).isRequired,
+    html: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  revealProjects: PropTypes.shape({
+    current: PropTypes.array,
+  }).isRequired,
 };
 
 const Featured = () => {
@@ -479,7 +604,7 @@ const Featured = () => {
   }, []);
 
   return (
-    <section id="projects">
+    <StyledFeaturedSection id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
         Some Things I’ve Built
       </h2>
@@ -487,15 +612,10 @@ const Featured = () => {
       <StyledProjectsGrid>
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => (
-            <FeaturedProject 
-              key={i} 
-              node={node} 
-              index={i} 
-              revealProjects={revealProjects} 
-            />
+            <FeaturedProject key={i} node={node} index={i} revealProjects={revealProjects} />
           ))}
       </StyledProjectsGrid>
-    </section>
+    </StyledFeaturedSection>
   );
 };
 

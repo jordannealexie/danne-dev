@@ -3,7 +3,7 @@ date: '2026-02-01'
 title: 'Backend Developer Intern'
 company: 'SP Madrid and Associates Law Firm'
 location: 'Manila, PH'
-range: 'Jan 2026 - Feb 2026'
+range: '2026'
 url: 'https://www.linkedin.com/company/spmadridlawfirm/'
 ---
 
