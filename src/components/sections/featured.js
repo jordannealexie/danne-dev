@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
@@ -82,7 +82,7 @@ const StyledProject = styled.li`
         margin-right: 0;
       }
     }
-    .project-image {
+    .project-image-container {
       grid-column: 1 / 8;
 
       @media (max-width: 768px) {
@@ -240,8 +240,7 @@ const StyledProject = styled.li`
     }
   }
 
-  .project-image {
-    ${({ theme }) => theme.mixins.boxShadow};
+  .project-image-container {
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
@@ -252,6 +251,13 @@ const StyledProject = styled.li`
       height: 100%;
       opacity: 0.25;
     }
+  }
+
+  .project-image {
+    ${({ theme }) => theme.mixins.boxShadow};
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 
     a {
       width: 100%;
@@ -259,40 +265,26 @@ const StyledProject = styled.li`
       background-color: var(--green);
       border-radius: var(--border-radius);
       vertical-align: middle;
+      display: block;
 
       &:hover,
       &:focus {
         background: transparent;
         outline: 0;
 
-        &:before,
         .img {
-          background: transparent;
           filter: none;
+          mix-blend-mode: normal;
         }
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 3;
-        transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
       }
     }
 
     .img {
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
-
+      filter: grayscale(100%) contrast(1);
+      transition: var(--transition);
+      
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
@@ -301,20 +293,161 @@ const StyledProject = styled.li`
       }
     }
   }
+
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    gap: 15px;
+    position: relative;
+    z-index: 5;
+
+    .carousel-arrow {
+      background: transparent;
+      border: none;
+      color: var(--lightest-slate);
+      cursor: pointer;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      
+      &:hover {
+        color: var(--green);
+      }
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--dark-slate);
+        transition: var(--transition);
+        
+        &.active {
+          background-color: var(--green);
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
 `;
+
+const FeaturedProject = ({ node, index, revealProjects }) => {
+  const { frontmatter, html } = node;
+  const { external, title, tech, github, images, cta } = frontmatter;
+  
+  const [activeImg, setActiveImg] = useState(0);
+  
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (images && images.length > 0) {
+      setActiveImg(activeImg === 0 ? images.length - 1 : activeImg - 1);
+    }
+  };
+  
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (images && images.length > 0) {
+      setActiveImg(activeImg === images.length - 1 ? 0 : activeImg + 1);
+    }
+  };
+
+  const image = images && images.length > 0 ? getImage(images[activeImg]) : null;
+
+  return (
+    <StyledProject ref={el => (revealProjects.current[index] = el)}>
+      <div className="project-content">
+        <div>
+          <p className="project-overline">Featured Project</p>
+
+          <h3 className="project-title">
+            <a href={external ? external : github ? github : '#'}>{title}</a>
+          </h3>
+
+          <div
+            className="project-description"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+
+          {tech.length && (
+            <ul className="project-tech-list">
+              {tech.map((techItem, i) => (
+                <li key={i}>{techItem}</li>
+              ))}
+            </ul>
+          )}
+
+          <div className="project-links">
+            {cta && (
+              <a href={cta} aria-label="Course Link" className="cta">
+                Learn More
+              </a>
+            )}
+            {github && (
+              <a href={github} aria-label="GitHub Link">
+                <Icon name="GitHub" />
+              </a>
+            )}
+            {external && !cta && (
+              <a href={external} aria-label="External Link" className="external">
+                <Icon name="External" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="project-image-container">
+        <div className="project-image">
+          <a href={external ? external : github ? github : '#'}>
+            {image && <GatsbyImage image={image} alt={title} className="img" />}
+          </a>
+        </div>
+        
+        {images && images.length > 1 && (
+          <div className="carousel-controls">
+            <button className="carousel-arrow" onClick={handlePrev} aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div className="carousel-dots">
+              {images.map((_, i) => (
+                <span key={i} className={`dot ${i === activeImg ? 'active' : ''}`} />
+              ))}
+            </div>
+            <button className="carousel-arrow" onClick={handleNext} aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        )}
+      </div>
+    </StyledProject>
+  );
+};
 
 const Featured = () => {
   const data = useStaticQuery(graphql`
     {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
           node {
             frontmatter {
               title
-              cover {
+              images {
                 childImageSharp {
                   gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
                 }
@@ -353,62 +486,14 @@ const Featured = () => {
 
       <StyledProjectsGrid>
         {featuredProjects &&
-          featuredProjects.map(({ node }, i) => {
-            const { frontmatter, html } = node;
-            const { external, title, tech, github, cover, cta } = frontmatter;
-            const image = getImage(cover);
-
-            return (
-              <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
-                <div className="project-content">
-                  <div>
-                    <p className="project-overline">Featured Project</p>
-
-                    <h3 className="project-title">
-                      <a href={external}>{title}</a>
-                    </h3>
-
-                    <div
-                      className="project-description"
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
-
-                    {tech.length && (
-                      <ul className="project-tech-list">
-                        {tech.map((tech, i) => (
-                          <li key={i}>{tech}</li>
-                        ))}
-                      </ul>
-                    )}
-
-                    <div className="project-links">
-                      {cta && (
-                        <a href={cta} aria-label="Course Link" className="cta">
-                          Learn More
-                        </a>
-                      )}
-                      {github && (
-                        <a href={github} aria-label="GitHub Link">
-                          <Icon name="GitHub" />
-                        </a>
-                      )}
-                      {external && !cta && (
-                        <a href={external} aria-label="External Link" className="external">
-                          <Icon name="External" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
-                  </a>
-                </div>
-              </StyledProject>
-            );
-          })}
+          featuredProjects.map(({ node }, i) => (
+            <FeaturedProject 
+              key={i} 
+              node={node} 
+              index={i} 
+              revealProjects={revealProjects} 
+            />
+          ))}
       </StyledProjectsGrid>
     </section>
   );
