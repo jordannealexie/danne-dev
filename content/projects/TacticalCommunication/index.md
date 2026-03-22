@@ -1,9 +1,13 @@
 ---
-date: '2'
+date: '2025-01-01'
 title: 'Indigenous Tactical Communication System'
 cover: './tactical.png'
 github: ''
 external: 'https://www.afp.mil.ph/news/afp-concludes-ideathon-2025-strengthens-innovation-partnership-with-academe'
+ios: ''
+android: ''
+cta: ''
+showInProjects: true
 tech:
   - Node.js
   - Express.js

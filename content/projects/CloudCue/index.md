@@ -1,9 +1,13 @@
 ---
-date: '3'
+date: '2022-01-01'
 title: 'CloudCue — Cloud-Based Task Management System'
 cover: './cloudcue.png'
 github: ''
 external: 'https://www.linkedin.com/in/jordanne-alexie-bartolome-1591212ba/overlay/Project/117320203/treasury/?profileId=ACoAAEyMVZUBc8yVa6Q9neqsHuPFL8NmZTMhMiM'
+ios: ''
+android: ''
+cta: ''
+showInProjects: true
 tech:
   - React.js
   - Redux Toolkit
