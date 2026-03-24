@@ -1,13 +1,12 @@
 ---
 date: '2024-01-01'
 title: 'CloudCue'
-cover: './cloudcue.png'
+images:
+  - './cloudcue1.png'
+  - './cloudcue2.png'
+  - './cloudcue3.png'
 github: 'https://github.com/jordannealexie/cloudcue'
 external: 'https://cloudcue-ten.vercel.app/'
-ios: ''
-android: ''
-cta: ''
-showInProjects: false
 tech:
   - TypeScript
   - Next.js

@@ -131,6 +131,13 @@ const StyledTableContainer = styled.div`
 
 const ArchivePage = ({ location, data }) => {
   const projects = data.allMarkdownRemark.edges;
+  const uniqueProjects = projects.filter(
+    ({ node }, index, self) =>
+      index ===
+      self.findIndex(
+        ({ node: comparedNode }) => comparedNode.frontmatter.title === node.frontmatter.title,
+      ),
+  );
   const revealTitle = useRef(null);
   const revealTable = useRef(null);
   const revealProjects = useRef([]);
@@ -167,8 +174,8 @@ const ArchivePage = ({ location, data }) => {
               </tr>
             </thead>
             <tbody>
-              {projects.length > 0 &&
-                projects.map(({ node }, i) => {
+              {uniqueProjects.length > 0 &&
+                uniqueProjects.map(({ node }, i) => {
                   const { date, github, external, ios, android, title, tech } = node.frontmatter;
                   return (
                     <tr key={i} ref={el => (revealProjects.current[i] = el)}>
@@ -231,7 +238,7 @@ export default ArchivePage;
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/projects/" } }
+      filter: { fileAbsolutePath: { regex: "/content/(projects|featured)/" } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

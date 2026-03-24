@@ -15,4 +15,4 @@ tech:
   - Raspberry Pi
 ---
 
-An AI-powered IoT driver monitoring system that detects drowsiness in real-time using computer vision and embedded hardware sensors. It combines edge AI processing on Raspberry Pi, real-time backend streaming via WebSockets, and a modern monitoring dashboard to prevent fatigue-related road accidents.
+An AI-powered IoT driver monitoring system built specifically for bus companies to monitor their drivers and reduce fatigue-related incidents. It combines edge AI processing on Raspberry Pi, real-time backend streaming via WebSockets, and a modern operations dashboard for fleet-level visibility and intervention.

@@ -1,11 +1,12 @@
 ---
 date: '2026-03-01'
 title: 'The Last Modder'
-images:
-  - './thelastmodder1.png'
-  - './thelastmodder2.png'
 github: 'https://github.com/jordannealexie/the-last-modder'
 external: 'https://the-last-modder.vercel.app/'
+ios: ''
+android: ''
+cta: ''
+showInProjects: true
 tech:
   - Vanilla JS
   - HTML5 Canvas
