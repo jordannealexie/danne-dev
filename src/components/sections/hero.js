@@ -65,7 +65,9 @@ const Hero = () => {
   const four = (
     <>
       <p>
-        I’m a computer engineering student specializing in digital things. I stay sharp by experimenting with different tools and languages and building both fun and useful projects along the way.
+        I'm passionate about building modern, user-focused applications and enjoy working across the
+        full stack. I stay sharp by experimenting with different tools and languages and building
+        both fun and useful projects along the way.
       </p>
     </>
   );

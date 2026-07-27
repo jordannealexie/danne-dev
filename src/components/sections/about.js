@@ -125,7 +125,16 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['React.js', 'Node.js', 'Express.js', 'JavaScript', 'Python', 'Godot'];
+  const skills = [
+    'React.js',
+    'Next.js',
+    'Node.js',
+    'Express.js',
+    'TypeScript',
+    'JavaScript',
+    'Python',
+    'Docker',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -134,10 +143,7 @@ const About = () => {
       <div className="inner">
         <StyledText>
           <div>
-            <p>
-              Hi! I’m Danne. I’m a computer engineering student at Pamantasan ng Lungsod ng Maynila,
-              and I love creating digital things.
-            </p>
+            <p>Hi! I’m Danne. I love creating digital things.</p>
 
             <p>
               My interest in programming started years ago, building websites on Neocities as a kid.
@@ -148,8 +154,10 @@ const About = () => {
             </p>
 
             <p>
-              Recently, I’m exploring the creative side of code through game development with the
-              Godot Engine. I believe in learning something new every day.
+              I'm particularly interested in full-stack development, cloud technologies, and
+              artificial intelligence. I enjoy solving complex problems, learning new technologies,
+              and building software that delivers meaningful value. I'm always looking for
+              opportunities to collaborate, grow, and create impactful products.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
