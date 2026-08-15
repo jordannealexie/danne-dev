@@ -2,6 +2,7 @@
 date: '2026-07-01'
 title: 'Vigilex'
 images:
+  - './0.png'
   - './1.png'
   - './2.png'
   - './3.png'

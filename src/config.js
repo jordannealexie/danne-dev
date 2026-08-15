@@ -3,20 +3,24 @@ module.exports = {
 
   socialMedia: [
     {
-      name: 'GitHub',
-      url: 'https://github.com/jordannealexie',
-    },
-    {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/dannelexie/',
-    },
-    {
       name: 'Linkedin',
       url: 'https://www.linkedin.com/in/jordanne-alexie-bartolome-1591212ba/',
     },
     {
+      name: 'GitHub',
+      url: 'https://github.com/jordannealexie',
+    },
+    {
+      name: 'Medium',
+      url: 'https://medium.com/@jordannebartolome',
+    },
+    {
       name: 'Codepen',
       url: 'https://codepen.io/jordannealexie',
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/dannelexie/',
     },
   ],
 

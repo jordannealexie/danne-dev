@@ -19,29 +19,25 @@ const StyledAboutSection = styled.section`
   }
 `;
 const StyledText = styled.div`
-  ul.skills-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    grid-gap: 0 10px;
-    padding: 0;
+  .skills-section {
     margin: 20px 0 0 0;
-    overflow: hidden;
-    list-style: none;
 
-    li {
-      position: relative;
-      margin-bottom: 10px;
-      padding-left: 20px;
-      font-family: var(--font-mono);
-      font-size: var(--fz-xs);
+    .skill-category {
+      margin-bottom: 15px;
 
-      &:before {
-        content: '▹';
-        position: absolute;
-        left: 0;
+      .skill-category-title {
         color: var(--green);
-        font-size: var(--fz-sm);
-        line-height: 12px;
+        font-family: var(--font-mono);
+        font-size: var(--fz-xs);
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .skill-items {
+        font-family: var(--font-mono);
+        font-size: var(--fz-xs);
+        color: var(--slate);
+        line-height: 1.6;
       }
     }
   }
@@ -125,15 +121,24 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = [
-    'React.js',
-    'Next.js',
-    'Node.js',
-    'Express.js',
-    'TypeScript',
-    'JavaScript',
-    'Python',
-    'Docker',
+  const skillCategories = [
+    {
+      title: 'Languages',
+      items: 'Python · TypeScript · JavaScript · Java · SQL · C++ · C#',
+    },
+    {
+      title: 'Frameworks & Libraries',
+      items:
+        'React · Next.js · Node.js · Express.js · FastAPI · Flask · .NET · Tailwind CSS · Redux Toolkit',
+    },
+    {
+      title: 'Databases',
+      items: 'PostgreSQL · MongoDB · Redis',
+    },
+    {
+      title: 'Tools & DevOps',
+      items: 'Docker · Jenkins · GitHub Actions · CI/CD · Linux',
+    },
   ];
 
   return (
@@ -143,11 +148,11 @@ const About = () => {
       <div className="inner">
         <StyledText>
           <div>
-            <p>Hi! I’m Danne. I love creating digital things.</p>
+            <p>Hi! I'm Danne. I love creating digital things.</p>
 
             <p>
               My interest in programming started years ago, building websites on Neocities as a kid.
-              That curiosity has since evolved into a passion for computer engineering. I’ve had the
+              That curiosity has since evolved into a passion for computer engineering. I've had the
               privilege of working as a Backend Developer Intern at a law firm, where I architected
               route optimization systems using VROOM and OSRM, built scalable REST APIs with
               Node.js, and implemented robust security policies.
@@ -159,13 +164,16 @@ const About = () => {
               and building software that delivers meaningful value. I'm always looking for
               opportunities to collaborate, grow, and create impactful products.
             </p>
-
-            <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
 
-          <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-          </ul>
+          <div className="skills-section">
+            {skillCategories.map((category, i) => (
+              <div className="skill-category" key={i}>
+                <div className="skill-category-title">{category.title}</div>
+                <div className="skill-items">{category.items}</div>
+              </div>
+            ))}
+          </div>
         </StyledText>
 
         <StyledPic>
