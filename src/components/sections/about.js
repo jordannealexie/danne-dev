@@ -152,17 +152,25 @@ const About = () => {
 
             <p>
               My interest in programming started years ago, building websites on Neocities as a kid.
-              That curiosity has since evolved into a passion for computer engineering. I've had the
-              privilege of working as a Backend Developer Intern at a law firm, where I architected
-              route optimization systems using VROOM and OSRM, built scalable REST APIs with
-              Node.js, and implemented robust security policies.
+              That curiosity has since evolved into a passion for computer engineering.
+            </p>
+
+            <p>
+              I'm currently a .NET Fullstack Developer Trainee at SMITS, Inc., the IT company of San
+              Miguel Corporation, where I'm honing my skills in building enterprise-grade
+              applications across the full stack.
             </p>
 
             <p>
               I'm particularly interested in full-stack development, cloud technologies, and
               artificial intelligence. I enjoy solving complex problems, learning new technologies,
-              and building software that delivers meaningful value. I'm always looking for
-              opportunities to collaborate, grow, and create impactful products.
+              and building software that delivers meaningful value.
+            </p>
+
+            <p>
+              Recently, I've been enjoying writing my thoughts and learnings as a developer on
+              Medium, sharing insights, tutorials, and reflections from my journey in tech. I'm
+              always looking for opportunities to collaborate, grow, and create impactful products.
             </p>
           </div>
 
