@@ -171,7 +171,7 @@ const About = () => {
             </p>
 
             <p>
-              Recently, I've been enjoying writing my thoughts and learnings as a developer on
+              Recently, I've been enjoying writing my thoughts and learnings as a developer on{' '}
               <a href="https://medium.com/@jordannebartolome" target="_blank" rel="noreferrer">
                 Medium
               </a>
