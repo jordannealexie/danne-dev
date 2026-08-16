@@ -156,9 +156,12 @@ const About = () => {
             </p>
 
             <p>
-              I'm currently a .NET Fullstack Developer Trainee at SMITS, Inc., the IT company of San
-              Miguel Corporation, where I'm honing my skills in building enterprise-grade
-              applications across the full stack.
+              I'm currently a .NET Fullstack Developer Trainee at{' '}
+              <a href="https://smits.com.ph/" target="_blank" rel="noreferrer">
+                SMITS, Inc.
+              </a>
+              , the IT company of San Miguel Corporation, where I'm honing my skills in building
+              enterprise-grade applications across the full stack.
             </p>
 
             <p>
@@ -169,8 +172,11 @@ const About = () => {
 
             <p>
               Recently, I've been enjoying writing my thoughts and learnings as a developer on
-              Medium, sharing insights, tutorials, and reflections from my journey in tech. I'm
-              always looking for opportunities to collaborate, grow, and create impactful products.
+              <a href="https://medium.com/@jordannebartolome" target="_blank" rel="noreferrer">
+                Medium
+              </a>
+              , sharing insights, tutorials, and reflections from my journey in tech. I'm always
+              looking for opportunities to collaborate, grow, and create impactful products.
             </p>
           </div>
 
